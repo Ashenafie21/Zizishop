@@ -1,0 +1,25 @@
+/* Your custom CSS file or styles */
+.custom-sidebar {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-sidebar.open {
+  transform: translateX(0);
+}
+
+.custom-close-icon {
+
+  opacity: 1; /* Set initial opacity */
+  transition: opacity 0.3s ease-in-out; /* Add transition for opacity */
+}
+
+.custom-sidebar.closed .custom-close-icon {
+  opacity: 0; /* Set opacity to 0 when the sidebar is closed */
+}
+.custom-close-icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 60; /* Adjust as needed to ensure the close icon is above the overlay */
+}
