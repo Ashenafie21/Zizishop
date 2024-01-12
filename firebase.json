@@ -9,8 +9,7 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "predeploy": [],
-      "source": "functions"
+      "predeploy": []
     }
   ]
 }

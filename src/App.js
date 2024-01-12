@@ -17,7 +17,6 @@ import {
   Orders,
 } from "./components";
 const stripekey = process.env.REACT_APP_STRIPE;
-
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);

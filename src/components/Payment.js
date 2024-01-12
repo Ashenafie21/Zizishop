@@ -13,7 +13,6 @@ import {
 import ProductDetails from "./ProductDetails";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "../utils/CallApi";
-
 function Payment() {
   const products = useSelector((state) => state.cart.products);
   const itemsNumber = useSelector((state) => state.cart.productsNumber);
@@ -79,7 +78,7 @@ function Payment() {
       fetchAddress();
     }
   }, [user, showAddressForm]);
-  
+
   const handleOverlayClick = (e) => {
     // Check if the clicked element is not within the form
     if (!e.target.closest(".new-address-form")) {
@@ -128,11 +127,49 @@ function Payment() {
     }
   };
 
+  useEffect(() => {
+    // Fetch the client secret from your backend when the component mounts
+    const fetchClientSecret = async () => {
+      try {
+        console.log("Subtotal:", subtotal);
+        console.log("Axios Request Data:", {
+          total: subtotal * 100,
+        });
+         const response = await axios.post( "/payments/create",
+           {
+             total: subtotal * 100, // Convert total to cents
+           }
+         );
+        // const response = await axios.post(
+        //   `/payments/create?total=${subtotal * 100}`
+        //   //  {
+        //   //   //  total: subtotal * 100, // Convert total to cents
+        //   //  }
+        // );
+
+        console.log("Response from backend:", response.data);
+        // console.log(response);
+        setClientSecret(response.data.clientSecret);
+        console.log("Client Secret:", response.data.clientSecret);
+      } catch (error) {
+        console.error("Error fetching client secret:", error);
+      }
+    };
+
+    fetchClientSecret();
+  }, [subtotal]);
+
+  // console.log("Client Secret:", clientSecret);
 
   const handleSumit = async (e) => {
     e.preventDefault();
     setProcessing(true);
 
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
     const basketItems = products.map((product) => ({
       id: product.id,
       title: product.title,
@@ -157,12 +194,6 @@ function Payment() {
         .collection("orders")
         .doc(orderId)
         .set(orderData);
-
-      const payload = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      });
 
       setSucceeded(true);
       setError(null);
