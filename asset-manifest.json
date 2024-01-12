@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/zizishopfrontend/static/css/main.7686b405.css",
+    "main.js": "/zizishopfrontend/static/js/main.21f7df64.js",
+    "index.html": "/zizishopfrontend/index.html",
+    "main.7686b405.css.map": "/zizishopfrontend/static/css/main.7686b405.css.map",
+    "main.21f7df64.js.map": "/zizishopfrontend/static/js/main.21f7df64.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7686b405.css",
+    "static/js/main.21f7df64.js"
+  ]
+}
