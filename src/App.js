@@ -16,7 +16,8 @@ import {
   Payment,
   Orders,
 } from "./components";
-const stripekey = process.env.REACT_APP_STRIPE;
+// const stripekey = process.env.REACT_APP_STRIPE;
+const stripekey  ='pk_test_51OPvWsE20rTG9mx1Sd2vvcDhqLQNQNZBpOzGK5Q8Bqclnz8MXOcVLKkXtcXw8aF9L58QxIlFv3x4RAzAP84NdjpZ00lZK1aYup'
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
