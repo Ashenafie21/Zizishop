@@ -52,7 +52,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
+    <Router >
       <NavBar />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
